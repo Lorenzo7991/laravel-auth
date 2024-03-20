@@ -24,6 +24,8 @@ Route::middleware('auth')->group(function () {
 Route::get('/', GuestHomeController::class)->name('guest.home');
 
 Route::get('/admin', [AdminHomeController::class, 'index'])->middleware(['auth', 'verified'])->name('admin.home');
+Route::get('/admin/projects', [AdminHomeController::class, 'projectsIndex'])->middleware(['auth', 'verified'])->name('admin.projects.index');
+
 
 require __DIR__ . '/auth.php';
 

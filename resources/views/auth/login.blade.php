@@ -1,5 +1,7 @@
 @extends('layouts.main')
 
+@section('title', 'Authentication')
+
 
 @section('content')
 <div class="container mt-4">
