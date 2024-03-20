@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\GuestHomeController;
+use App\Http\Controllers\AdminHomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,19 +15,15 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
-Route::get('/', function () {
-    return view('guest.home');
-})->name('guest.home');
-
-Route::get('/admin', function () {
-    return view('admin.home');
-})->middleware(['auth', 'verified'])->name('admin.home');
-
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+Route::get('/', GuestHomeController::class)->name('guest.home');
+
+Route::get('/admin', [AdminHomeController::class, 'index'])->middleware(['auth', 'verified'])->name('admin.home');
+
 require __DIR__ . '/auth.php';
+
