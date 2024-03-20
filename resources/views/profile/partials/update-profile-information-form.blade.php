@@ -1,5 +1,5 @@
 <section>
-    <header>
+    <header >
         <h2 class="text-secondary">
             {{ __('Profile Information') }}
         </h2>
@@ -40,7 +40,7 @@
             </span>
             @enderror
 
-            @if ($user instanceof \Illuminate\Contracts\Auth\MustVerifyEmail && ! $user->hasVerifiedEmail())
+            @if ($user instanceof \Illuminate\Contracts\Auth\MustVerifyEmail && !$user->hasVerifiedEmail())
             <div>
                 <p class="text-sm mt-2 text-muted">
                     {{ __('Your email address is unverified.') }}
