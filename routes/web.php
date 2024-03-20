@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\GuestHomeController;
 use App\Http\Controllers\AdminHomeController;
+use App\Http\Controllers\ProjectController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,7 +25,8 @@ Route::middleware('auth')->group(function () {
 Route::get('/', GuestHomeController::class)->name('guest.home');
 
 Route::get('/admin', [AdminHomeController::class, 'index'])->middleware(['auth', 'verified'])->name('admin.home');
-Route::get('/admin/projects', [AdminHomeController::class, 'projectsIndex'])->middleware(['auth', 'verified'])->name('admin.projects.index');
+Route::get('/admin/projects/{id}', [ProjectController::class, 'show'])->name('admin.projects.show');
+Route::get('/admin/projects', [ProjectController::class, 'Index'])->middleware(['auth', 'verified'])->name('admin.projects.index');
 
 
 require __DIR__ . '/auth.php';

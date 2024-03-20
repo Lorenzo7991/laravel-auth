@@ -26,7 +26,7 @@ class ProjectFactory extends Factory
             'start_date' => now(),
             'end_date' => now()->addDays($this->faker->numberBetween(30, 365)),
             'technologies' => $this->faker->words(3, true),
-            'status' => $this->faker->randomElement(['In corso', 'Completato', 'Terminato']),
+            'status' => $this->faker->randomElement(['In corso', 'Completato', 'Sospeso']),
             'thumb' => $this->faker->imageUrl(),
             'documentation' => $this->faker->url,
             'slug' => $slug, // Assegna lo slug al campo del modello

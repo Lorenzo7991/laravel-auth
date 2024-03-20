@@ -44,7 +44,7 @@
                                     <td>
                                         <div id="icons-container" class="d-flex align-items-center">
 
-                                            <a href="#" title="View"><i class="fas fa-eye text-primary me-3"></i></a>
+                                            <a href="{{ route('admin.projects.show', $project) }} title="View"><i class="fas fa-eye text-primary me-3"></i></a>
                                             <a href="#" title="Edit"><i class="fas fa-pencil-alt text-warning me-3"></i></a>
                                             <a href="#" title="Delete"><i class="fas fa-trash-can"></i></a>
                                         </div>
