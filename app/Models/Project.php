@@ -18,5 +18,9 @@ class Project extends Model
         'status',
         'thumb',
         'documentation',
+        'slug',
+    ];
+    protected $casts = [
+        'slug' => 'string', //  n.b. conversione esplicita dello slug come stringa
     ];
 }
