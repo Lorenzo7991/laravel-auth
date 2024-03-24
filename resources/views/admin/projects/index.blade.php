@@ -8,7 +8,10 @@
     <div class="row justify-content-center">
         <div class="col">
             <div class="card">
-                <div class="card-header">{{ __('Projects List') }}</div>
+                <div class="card-header d-flex align-items-center justify-content-between">
+                    {{ __('Projects List') }}
+                    <a href="{{ route('admin.projects.create') }}" class="btn btn-success"><i class="fas fa-plus me-2"></i>{{ __('Add new Project') }}</a>
+                </div>
                 <div class="card-body">
                     <div class="table-responsive">
                         <table class="table table-striped">
@@ -23,6 +26,7 @@
                                     <th>Status</th>
                                     <th>Preview</th>
                                     <th>Documentation</th>
+                                    <th>Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -42,11 +46,14 @@
                                         <a href="{{ $project->documentation }}" target="_blank">{{ __('Documentation') }}</a>
                                     </td>
                                     <td>
-                                        <div id="icons-container" class="d-flex align-items-center">
-
-                                            <a href="{{ route('admin.projects.show', $project) }} title="View"><i class="fas fa-eye text-primary me-3"></i></a>
-                                            <a href="#" title="Edit"><i class="fas fa-pencil-alt text-warning me-3"></i></a>
-                                            <a href="#" title="Delete"><i class="fas fa-trash-can"></i></a>
+                                        <div id="icons-container" class="d-flex flex-column align-items-center">
+                                            <a href="{{ route('admin.projects.show', $project) }}" title="View"><i class="fas fa-eye text-primary mb-2"></i></a>
+                                            <a href="{{ route('admin.projects.edit', $project) }}" title="Edit"><i class="fas fa-pencil-alt text-warning mb-2"></i></a>
+                                            <a href="{{ route('admin.projects.destroy', $project) }}" title="Delete" onclick="event.preventDefault(); if(confirm('Are you sure you want to delete this project?')) { document.getElementById('delete-project-{{ $project->id }}').submit(); }"><i class="fas fa-trash-can text-danger"></i></a>
+                                            <form id="delete-project-{{ $project->id }}" action="{{ route('admin.projects.destroy', $project) }}" method="POST" style="display: none;">
+                                                @csrf
+                                                @method('DELETE')
+                                            </form>
                                         </div>
                                     </td>
                                 </tr>

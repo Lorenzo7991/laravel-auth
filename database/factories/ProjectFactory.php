@@ -23,10 +23,10 @@ class ProjectFactory extends Factory
         return [
             'title' => $title,
             'description' => $this->faker->sentence(),
-            'start_date' => now(),
-            'end_date' => now()->addDays($this->faker->numberBetween(30, 365)),
-            'technologies' => $this->faker->words(3, true),
-            'status' => $this->faker->randomElement(['In corso', 'Completato', 'Sospeso']),
+            'start_date' => now()->format('Y-m-d'),
+            'end_date' => now()->addDays($this->faker->numberBetween(30, 365))->format('Y-m-d'),
+            'technologies_used' => $this->faker->words(3, true),
+            'status' => $this->faker->randomElement(['Progress', 'Completed', 'Suspended']),
             'thumb' => $this->faker->imageUrl(),
             'documentation' => $this->faker->url,
             'slug' => $slug, // Assegna lo slug al campo del modello

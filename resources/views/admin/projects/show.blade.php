@@ -27,12 +27,24 @@
                         </div>
                     </div>
                 </div>
-                <div class="card-footer">
+                <div class="card-footer d-flex align-items-center justify-content-between">
                     @auth
-                    <a href="{{ route('guest.home') }}" class="btn btn-primary me-2">{{ __('Back to Home') }}</a>
-                        <a href="{{ route('admin.projects.index') }}" class="btn btn-secondary ">{{ __('Back to Projects List') }}</a>
-                        @else
-                        <a href="{{ route('guest.home') }}" class="btn btn-primary">{{ __('Back to Home') }}</a>
+                        <div id="left-footer">
+                            <a href="{{ route('guest.home') }}" class="btn btn-primary me-2"><i class="fas fa-arrow-left me-2"></i>{{ __('Back to Home') }}</a>
+                            <a href="{{ route('admin.projects.index') }}" class="btn btn-secondary "><i class="fas fa-bars me-2"></i>{{ __('Back to Projects List') }}</a>
+                        </div>
+                        <div id="right-footer">
+                            <a href="{{ route('admin.projects.edit', $project) }}" class="btn btn-warning me-2"><i class="fas fa-edit me-2"></i>{{ __('Edit') }}</a>
+                            <a href="#" class="btn btn-danger" onclick="event.preventDefault(); if(confirm('Are you sure you want to delete this project?')) { document.getElementById('delete-project-{{ $project->id }}').submit(); }">
+                                <i class="fas fa-trash-can me-2"></i>{{ __('Delete') }}
+                            </a>
+                            <form id="delete-project-{{ $project->id }}" action="{{ route('admin.projects.destroy', $project->id) }}" method="POST" style="display: none;">
+                                @csrf
+                                @method('DELETE')
+                            </form>
+                        </div>
+                    @else
+                        <a href="{{ route('guest.home') }}" class="btn btn-primary"><i class="fas fa-arrow-left me-2"></i>{{ __('Back to Home') }}</a>
                     @endauth
                 </div>
             </div>

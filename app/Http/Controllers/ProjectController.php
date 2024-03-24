@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Project;
+use App\Http\Requests\ProjectRequest;
+use Illuminate\Support\Carbon;
 
 class ProjectController extends Controller
 {
@@ -21,15 +23,21 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        //
+        // Formatta la data corrente nel formato desiderato (GG/MM/AAAA)
+        $formattedStartDate = Carbon::now()->format('d/m/Y');
+        $formattedEndDate = Carbon::now()->addDays(30)->format('d/m/Y');
+
+        return view('admin.projects.create', compact('formattedStartDate', 'formattedEndDate'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(ProjectRequest $request)
     {
-        //
+        Project::create($request->validated());
+
+        return redirect()->route('admin.projects.index')->with('success', 'Project created successfully.');
     }
 
     /**
@@ -45,17 +53,21 @@ class ProjectController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit($id)
     {
-        //
+        $project = Project::findOrFail($id);
+        return view('admin.projects.edit', compact('project'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(ProjectRequest $request, string $id)
     {
-        //
+        $project = Project::findOrFail($id);
+        $project->update($request->validated());
+
+        return redirect()->route('admin.projects.index')->with('success', 'Project updated successfully.');
     }
 
     /**
@@ -63,6 +75,9 @@ class ProjectController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $project = Project::findOrFail($id);
+        $project->delete();
+
+        return redirect()->route('admin.projects.index')->with('success', 'Project deleted successfully.');
     }
 }

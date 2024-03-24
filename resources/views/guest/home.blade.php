@@ -16,7 +16,8 @@
                 </div>
                 <div class="card-footer d-flex align-items-center justify-content-between">
 
-                <a href="{{ route('admin.projects.show', $project) }}" class="btn btn-primary">{{ __('View Project') }}</a>
+                <a href="{{ route('admin.projects.show', $project) }}" class="btn btn-primary">{{ __('View Project') }} <i class="fas fa-arrow-right ms-2"></i></a>
+
                 <p class="card-text"><strong>Status:</strong> {{ $project->status }}</p>
                 </div>
             </div>
