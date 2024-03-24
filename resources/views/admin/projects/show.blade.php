@@ -16,11 +16,13 @@
                                 <img src="{{ $project->thumb }}" class="img-fluid mb-3" alt="Project Image" style="height: 100%;">
                             @endif
                         </div>
+
+                        
                         <div class="col-md-8">
                             <p><strong>{{ __('Title') }}:</strong> {{ $project->title }}</p>
                             <p><strong>{{ __('Description') }}:</strong> {{ $project->description }}</p>
-                            <p><strong>{{ __('Start Date') }}:</strong> {{ $project->start_date }}</p>
-                            <p><strong>{{ __('End Date') }}:</strong> {{ $project->end_date }}</p>
+                            <p><strong>{{ __('Start Date') }}:</strong> {{ \Illuminate\Support\Carbon::parse($project->start_date)->format('d/m/Y') }}</p>
+                            <p><strong>{{ __('End Date') }}:</strong> {{ \Illuminate\Support\Carbon::parse($project->end_date)->format('d/m/Y') }}</p>
                             <p><strong>{{ __('Technologies') }}:</strong> {{ $project->technologies }}</p>
                             <p><strong>{{ __('Status') }}:</strong> {{ $project->status }}</p>
                             <p><strong>{{ __('Documentation') }}:</strong> <a href="{{ $project->documentation }}" target="_blank"> {{ __('View Documentation') }}</a></p>

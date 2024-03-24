@@ -35,8 +35,8 @@
                                     <td>{{ $project->title }}</td>
                                     <td>{{ Str::limit($project->slug, 20, '...') }}</td>
                                     <td>{{ $project->description }}</td>
-                                    <td>{{ $project->start_date }}</td>
-                                    <td>{{ $project->end_date }}</td>
+                                   <td>{{ \Illuminate\Support\Carbon::parse($project->start_date)->format('d/m/Y') }}</td>
+                                    <td>{{ \Illuminate\Support\Carbon::parse($project->end_date)->format('d/m/Y') }}</td>
                                     <td>{{ $project->technologies }}</td>
                                     <td>{{ $project->status }}</td>
                                     <td>
